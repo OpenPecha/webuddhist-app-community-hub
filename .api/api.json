@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "userback",
+      "source": "@userback/v1.0#p1t0f1vm86v0j4v",
+      "integrity": "sha512-xuEhHHcMsd8OjstlpdkG1c14WabsohMpL4j6g9QRc/aXgyZVT72/ZsTLVAWO8Q2qxQmuOJ7u/zUGf4GDre/yng==",
+      "installerVersion": "6.1.3"
+    }
+  ]
+}
