@@ -47,15 +47,15 @@ jobs:
                 content = content.replace(userbackHeaderRegex, '').trim();
 
                 // Define the new template
-                const template = `1. User story:
+                const template = `**1. User story:**
             As a ........
             I need .........
             In order to .......
 
-            2. Definition of Done(DoD)
-            - [ ] 
-            - [ ] 
-            - [ ] 
+            **2. Definition of Done(DoD)**
+                 - [ ] 
+                 - [ ] 
+                 - [ ] 
 
             ---
             **Original Feedback:**
