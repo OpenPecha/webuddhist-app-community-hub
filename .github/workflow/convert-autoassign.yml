@@ -1,50 +1,44 @@
-name: Auto Assign Issue Metadata and Format
-
 on:
+
   issues:
+
     types: [opened]
 
 jobs:
-  format_issue:
-    name: Convert Userback HTML to Markdown
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-    steps:
-      - name: Convert Body Format
-        env:
-          GH_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: |
-          # Retrieve the issue body
-          gh issue view $ISSUE_NUMBER --json body -q .body > body.html
-
-          # Convert HTML to GitHub Flavored Markdown using Pandoc
-          pandoc body.html -f html -t gfm -o body.md
-
-          # Update the issue with the new Markdown body
-          gh issue edit $ISSUE_NUMBER --body-file body.md
 
   add_metadata:
-    name: Add Project and Labels
-    needs: format_issue
+
     runs-on: ubuntu-latest
+
     steps:
+
       - name: Add issue to project and set status
+
         uses: actions/add-to-project@v1.0.1
+
         with:
-          project-url: [https://github.com/orgs/OpenPecha/projects/116](https://github.com/orgs/OpenPecha/projects/116)
-          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+          project-url: https://github.com/orgs/OpenPecha/projects/116
+
+          github-token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
 
       - name: Add labels to new issue
+
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+          github-token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
           script: |
               const labels = ["user-feedback", "buddhistai tools"];
+
               await github.rest.issues.addLabels({
+
                 owner: context.repo.owner,
+
                 repo: context.repo.repo,
+
                 issue_number: context.issue.number,
+
                 labels: labels
+
               });
